@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Résultats {% endblock title %}
+
+{% block content %}
+
+	{{rmt.user1.get_full_name}}
+	{{rmt.user2.get_full_name}}
+	{{rmt.chambre.name}} - {{rmt.chambre.get_cite_display}}
+
+{% endblock content %}

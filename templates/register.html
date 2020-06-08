@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+	<div class="py-5 row justify-content-center">
+		<dir class="col-md-4 p-3 border mx-2 shadow-sm rounded bg-white">
+			<h3>CHAMBRTI</h3>
+			<form  method='POST'>
+				{% csrf_token %}
+					<input class="form-control" type="text" name="username" id="id_username" placeholder="Nom d'utilisateur" required>
+					<select class="form-control" name="genre" id="id_genre">
+						<option value='boy' selected>Garçon</option>
+						<option value='girl'>Fille</option>
+					</select>
+					<select class="form-control" name="annee" id="id_annee">
+						<option value='second' selected>2ème Année</option>
+						<option value='third'>3ème Année</option>
+					</select>
+					<input class="form-control" type="text" name="first_name" id="id_first_name" placeholder="Prénom" required>
+					<input class="form-control" type="text" name="last_name" id="id_last_name" placeholder="Nom" required>
+					<input class="form-control" type="password" name="password1" id="id_password1" placeholder="Mot de passe (Minimum 8 caractères)" required>
+					<input class="form-control" type="password" name="password2" id="id_password2" placeholder="Confirmation du mot de passe" required>
+					<div class="text-center pt-3"><button class="btn btn-sm px-3 py-2 shadow-none btn-primary" type="submit"><strong>s'inscrire</strong></button></div>
+			</form>
+		</div>
+	</div>
+	</div>
+
+{% endblock content %}

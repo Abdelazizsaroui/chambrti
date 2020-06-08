@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %} 
+
+    <nav class="navbar navbar-light bg-white navbar-border shadow-sm sticky-top">
+    <div class="container">
+		<a type="button" id="clear" class="text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ANNULER</a>
+		<form method="POST" action="results/">
+		{% csrf_token %}
+		<input type="text" name="choices_input" id="choices_input" hidden>
+		<button class="btn btn-sm px-3 py-2 shadow-none btn-primary ml-2" id="result" type="submit"><strong><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg> terminer</strong></button>
+		</form>
+
+      <div class="dropleft px-3">
+        <a class="text-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </a>
+        <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+        <div class="px-3">
+          <p>{{user.get_full_name}}</p>
+           <p>{{coch.get_full_name}} <a type="button" data-toggle="modal" data-target="#delete_coch" class="text-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 2 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg></a></p>
+        </div>
+          <div class="dropdown-divider"></div>
+           <a class="dropdown-item" href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Quitter</a>
+        </div>
+      </div>
+
+		</div>
+    </nav>
+
+	<div class="container py-4">
+
+		{% if stored_choices %}
+			<p class="text-center"><a type="button" data-toggle="modal" data-target="#stored_choices" class="text-success"><strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Voir vos choix</strong></a><span class="text-muted"> (enregistrés le {{updated_at|date:"d F à H:i"}})</span></p>
+
+			<div class="modal fade" id="stored_choices" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			    <div class="modal-header">
+			    <span>
+	    		<h3>Vos choix actuels</h3>
+	    		<p class="mb-0">Classement du gauche à droite</p>
+	    		</span>
+	    		 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	    	</div>
+			      <div class="modal-body">
+			      	<div class="text-center">
+			      	{% for ch in stored_choices %}
+			      		<span class="badge badge-light p-2 m-1">{{ch}}</span>
+			      	{% endfor %}
+			      	</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+		{% endif %}
+
+		  <div class="row justify-content-center p-3">
+		  	<div class="col-md-6 col-lg-4 d-flex justify-content-between">
+		  		<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="5" y1="12" x2="19" y2="12"></line></svg><strong> Cité 1</strong></p>
+		  		<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-success"><line x1="5" y1="12" x2="19" y2="12"></line></svg><strong> Cité 3</strong></p>
+		  		<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-danger"><line x1="5" y1="12" x2="19" y2="12"></line></svg><strong> Cité 2</strong></p>
+		  		<a type="button" class="text-secondary" data-toggle="modal" data-target="#howitworks"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></a>
+		  	</div>
+		  </div>
+		<div class="row">
+			{% for c in lst1 %}
+			<div class="col-6 col-md-3 col-lg-2 my-2 text-center chambre">
+				<button class="btn btn-block btn-secondary shadow-sm border border-primary">{{c.name}} <span class="badge badge-primary d-none"></span></button>
+				<span class="d-none" id="ch_num">{{c.num}}</span>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="row">
+			{% for c in lst3 %}
+			<div class="col-6 col-md-3 col-lg-2 my-2 text-center chambre">
+				<button class="btn btn-block btn-secondary shadow-sm border border-success">{{c.name}} <span class="badge badge-success d-none"></span></button>
+				<span class="d-none" id="ch_num">{{c.num}}</span>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="row">
+			{% for c in lst2 %}
+			<div class="col-6 col-md-3 col-lg-2 my-2 text-center chambre">
+				<button class="btn btn-block btn-secondary shadow-sm border border-danger">{{c.name}} <span class="badge badge-danger d-none"></span></button>
+				<span class="d-none" id="ch_num">{{c.num}}</span>
+			</div>
+			{% endfor %}
+		</div>
+		<p class="text-center mt-5 text-muted">Built with <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-danger"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> and Python. No rights are reserved.</p>
+	</div>
+
+	<div class="modal fade" id="howitworks" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	    		<h3>Comment ça marche?</h3>
+	    		 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	    	</div>
+	      <div class="modal-body">
+	       	<p>Vous cliquez sur les chambres dans l'ordre de votre préférence. Lorsque vous cliquez sur une chambre vous remarquez que son numéro d'order est ajouté à son box.</p>
+	       	<p>Il n'est pas obligatoire de classer toutes les chambres. Lors du tirage, si vous êtes dans une position où aucune des chambres que vous avez choisi n'est disponible, une chambre vous sera affecté aléatoirement.</p>
+	       	<p>Pour éviter le risque d'annuler un choix sans faire attention, vous ne pouvez annuler que le dernier choix à chaque instant. çad si vous avez classer 20 chambres, vous ne pouvez pas annuler le choix 17 que si vous annulez les choix 20, 19 et 18 dans cet ordre.</p>
+	       	<p>Pour annuler tous les choix, cliquez sur <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 1 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> ANNULER.</p>
+	       	<p>Si vous n'aimez pas votre cochambre, vous pouvez le supprimer dans le menu <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> et choisir un(e) autre. On va rien lui dire.</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="delete_coch" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<div class="text-center">
+			      		<p class="lead">Etes-vous sûr de supprimer votre cochambre {{coch.get_full_name}} ?</p>
+			      		<p>Vous serez rediregé vers une autre page pour ajouter un(e) cochambre</p>
+			      	</div>
+			      </div>
+			      <div class="modal-footer">
+			              <a href="{% url 'delete' %}" class="btn btn-sm px-3 py-2 shadow-none btn-danger">Oui, supprimer</a>
+			              <button type="button" class="btn btn-sm px-3 py-2 shadow-none btn-success" data-dismiss="modal">Annuler</button>
+			            </div>
+			    </div>
+			  </div>
+			</div>
+
+
+{% endblock content %}
+
+{% block script %}
+
+	<script>
+		$(document).ready(function() {
+
+			var i = 1;
+			var res = [];
+			$(".chambre").click(function() {
+
+				if($(this).children("button").children("span").hasClass("d-none")){
+					res.push($(this).children("#ch_num").text());
+					$(this).children("button").children("span").text(i);
+					i = i+1;
+					$(this).children("button").children("span").removeClass("d-none");
+			} else {
+				if($(this).children("button").children("span").text() == i-1){
+					res.pop();
+					$(this).children("button").children("span").text("");
+					i = i-1;
+					$(this).children("button").children("span").addClass("d-none");
+				} else {
+					alert("Pour annuler ce choix, vous devez annulez d'abord tous les choix qui vient après !")
+				}
+			}
+
+			if(i>1){
+					$("#clear").removeClass("text-white");
+					$("#clear").addClass("text-danger");
+				} else {
+					$("#clear").removeClass("text-danger");
+					$("#clear").addClass("text-white");
+				}
+
+			});
+
+			$("#clear").click(function() {
+				$(".chambre").children("button").children("span").addClass("d-none");
+				$(".chambre").children("button").children("span").text("");
+				i = 1;
+				res = [];
+				$("#clear").removeClass("text-danger");
+				$("#clear").addClass("text-white");
+			});
+
+			$("#result").click(function(event) {
+				if(i==1){
+					event.preventDefault();
+					alert("Vous devez choisir au moins une chambre");
+				} else {
+					$("#choices_input").val(res.toString());
+				}
+			});
+
+		});
+	</script>
+
+{% endblock script %}
