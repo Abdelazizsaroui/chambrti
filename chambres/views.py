@@ -16,7 +16,7 @@ def home(request):
 			coch = u.roommate1.all().first().user2
 		else:
 			coch = u.roommate2.all().first().user1
-		if u.groups.all().first() == "boy":
+		if u.groups.all().first().name == "boy":
 			genre = 1
 		else:
 			genre = 2
