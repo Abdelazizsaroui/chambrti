@@ -16,7 +16,7 @@
 			{% endif %}
 			<form  method='POST'>
 				{% csrf_token %}
-				<input placeholder='Email' type="text" name="username" id="id_username" class="form-control" required>
+				<input placeholder="Nom d'utilisateur" type="text" name="username" id="id_username" class="form-control" required>
 				<input placeholder='Mot de passe' type="password" name="password" id="id_password" class="form-control" required>
 				<div class="text-center pt-3"><button class="btn btn-sm px-3 py-2 shadow-none btn-primary" type="submit"><strong>connexion</strong></button></div>
 			</form>
