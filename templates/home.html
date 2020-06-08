@@ -48,7 +48,7 @@
         </button>
 	    	</div>
 			      <div class="modal-body">
-			      	<div class="text-center">
+			      	<div>
 			      	{% for ch in stored_choices %}
 			      		<span class="badge badge-light p-2 m-1">{{ch}}</span>
 			      	{% endfor %}
@@ -125,8 +125,8 @@
 			      	</div>
 			      </div>
 			      <div class="modal-footer">
-			              <a href="{% url 'delete' %}" class="btn btn-sm px-3 py-2 shadow-none btn-danger">Oui, supprimer</a>
-			              <button type="button" class="btn btn-sm px-3 py-2 shadow-none btn-success" data-dismiss="modal">Annuler</button>
+			              <a href="{% url 'delete' %}" class="btn btn-sm px-3 py-2 shadow-none btn-danger"><strong>Oui, supprimer</strong></a>
+			              <button type="button" class="btn btn-sm px-3 py-2 shadow-none btn-success" data-dismiss="modal"><strong>Annuler</strong></button>
 			            </div>
 			    </div>
 			  </div>
