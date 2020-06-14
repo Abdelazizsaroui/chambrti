@@ -10,6 +10,7 @@
 			<h3>CHAMBRTI</h3>
 			<form  method='POST'>
 				{% csrf_token %}
+					{{form.username.errors}}
 					<input class="form-control" type="text" name="username" id="id_username" placeholder="Nom d'utilisateur (pas d'espace)" required>
 					<select class="form-control" name="genre" id="id_genre">
 						<option value='boy' selected>Garçon</option>
@@ -19,9 +20,13 @@
 						<option value='second' selected>2ème Année</option>
 						<option value='third'>3ème Année</option>
 					</select>
+					{{form.first_name.errors}}
 					<input class="form-control" type="text" name="first_name" id="id_first_name" placeholder="Prénom" required>
+					{{form.last_name.errors}}
 					<input class="form-control" type="text" name="last_name" id="id_last_name" placeholder="Nom" required>
+					{{form.password1.errors}}
 					<input class="form-control" type="password" name="password1" id="id_password1" placeholder="Mot de passe (Minimum 8 caractères)" required>
+					{{form.password2.errors}}
 					<input class="form-control" type="password" name="password2" id="id_password2" placeholder="Confirmation du mot de passe" required>
 					<div class="text-center pt-3"><button class="btn btn-sm px-3 py-2 shadow-none btn-primary" type="submit"><strong>s'inscrire</strong></button></div>
 			</form>
