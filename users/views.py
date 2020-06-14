@@ -24,7 +24,8 @@ def register(request):
 			group.user_set.add(user)
 			user.save()
 			return redirect('home')
-	form = RegisterForm()
+	else:
+		form = RegisterForm()
 	return render(request, 'register.html', {'form': form})
 
 @login_required
