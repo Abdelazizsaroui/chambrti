@@ -8,11 +8,11 @@
 	<div class="py-5 row justify-content-center">
 		<dir class="col-md-4 p-3 border mx-2 shadow-sm rounded bg-white">
 			<h3>CHAMBRTI</h3>
-			<div class="alert alert-danger">
+			<div>
 				{% if form.errors %}
 				    {% for field in form %}
 				        {% for error in field.errors %}
-				            <p> {{ error }} </p>
+				            <p class="text-danger"> {{ error }} </p>
 				        {% endfor %}
 				    {% endfor %}
 				{% endif %}
