@@ -10,7 +10,7 @@
 			<h3>CHAMBRTI</h3>
 			<form  method='POST'>
 				{% csrf_token %}
-					<input class="form-control" type="text" name="username" id="id_username" placeholder="Nom d'utilisateur" required>
+					<input class="form-control" type="text" name="username" id="id_username" placeholder="Nom d'utilisateur (pas d'espace)" required>
 					<select class="form-control" name="genre" id="id_genre">
 						<option value='boy' selected>Garçon</option>
 						<option value='girl'>Fille</option>
