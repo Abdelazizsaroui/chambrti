@@ -131,6 +131,8 @@ def tirage(request):
 	return redirect('home')
 
 def done(request):
+	if not request.user.is_superuser:
+		raise PermissionDenied
 	u = request.user
 	rmt = Roommates.objects.get(Q(user1=u)|Q(user2=u))
 	return render(request, 'done.html', {'rmt': rmt})

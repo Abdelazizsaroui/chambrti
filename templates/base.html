@@ -1,12 +1,29 @@
 {% load static %}
+
+<!-- Hi Mr Robot :) I see you're curious !
+
+Please don't try something stupid or you'll probably
+end up in some random room in CITE 2 with some Bizu.
+
+Enimistement -->
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161829845-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-161829845-4');
+    </script>
+
     <title>{% block title %} {% endblock title %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
     <link rel="icon" href="{% static 'favicon.ico' %}">
     {% block style %} {% endblock style %}

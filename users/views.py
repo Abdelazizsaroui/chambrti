@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 from django.db.models import Q
 from users.models import Roommates
@@ -26,6 +27,7 @@ def register(request):
 	form = RegisterForm()
 	return render(request, 'register.html', {'form': form})
 
+@login_required
 def roommate(request):
 	if request.user.roommate1.all().count() != 0 or request.user.roommate2.all().count() != 0:
 		return redirect('home')
@@ -37,6 +39,7 @@ def roommate(request):
 		return render(request, 'roommate.html', {'results': results})
 	return render(request, 'roommate.html')
 
+@login_required
 def add(request, pk):
 	if request.user.roommate1.all().count() != 0 or request.user.roommate2.all().count() != 0:
 		return HttpResponse("Nice Try :)")
@@ -45,6 +48,7 @@ def add(request, pk):
 	obj.save()
 	return redirect('home')
 
+@login_required
 def delete(request):
 	if request.user.roommate1.all().count() != 0:
 		request.user.roommate1.all().first().delete()
