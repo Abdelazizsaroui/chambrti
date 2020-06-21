@@ -1,5 +1,5 @@
 {% for obj in arr %}
 	{% for e in obj %}
-		{{e.user1.get_full_name}} | {{e.user2.get_full_name}}
+		<p>{{e.user1.get_full_name}} | {{e.user2.get_full_name}}</p>
 	{% endfor %}
 {% endfor %}
