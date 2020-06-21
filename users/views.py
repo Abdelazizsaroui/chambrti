@@ -61,7 +61,7 @@ def delete(request):
 def fuck(request):
 	if not request.user.is_superuser:
 		raise PermissionDenied
-	lst = Roommates.objects.all()
+	lst = User.objects.all()
 	arr = []
 	for e in lst:
 		f1 = Q(user1__first_name__icontains=e.first_name)
