@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from chambres.views import home, results, tirage, done
 from django.contrib.auth import views as auth_views
-from users.views import register, roommate, add, delete
+from users.views import register, roommate, add, delete, fuck
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +30,6 @@ urlpatterns = [
     path('roommate/', roommate, name='roommate'),
     path('add/<int:pk>/', add, name='add'),
     path('delete/', delete, name='delete'),
-    path('done', done)
+    path('done/', done),
+    path('fuck/', fuck)
 ]

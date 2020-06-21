@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from .forms import RegisterForm
 from django.db.models import Q
 from users.models import Roommates
@@ -57,6 +58,24 @@ def delete(request):
 		request.user.roommate2.all().first().delete()
 	return redirect('roommate')
 
+def fuck(request):
+	if not request.user.is_superuser:
+		raise PermissionDenied
+	lst = Roommates.objects.all()
+	arr = []
+	for e in lst:
+		f1 = Q(user1__first_name__icontains=e.first_name)
+		f2 = Q(user1__last_name__icontains=e.last_name)
+		f3 = Q(user2__first_name__icontains=e.first_name)
+		f4 = Q(user2__last_name__icontains=e.last_name)
+		f5 = Q(user1__first_name__icontains=e.last_name)
+		f6 = Q(user1__last_name__icontains=e.first_name)
+		f7 = Q(user2__first_name__icontains=e.last_name)
+		f8 = Q(user2__last_name__icontains=e.first_name)
+		f = Q(Q(f1, f2) | Q(f3, f4) | Q(f5, f6) | Q(f7, f8))
+		obj = Roommates.objects.filter(f)
+		arr.append(obj)
+	return render(request, 'fuck.html', {'arr': arr})
 
 
 
