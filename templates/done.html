@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %} Résultats {% endblock title %}
+{% block title %} CHAMBRTI | Résultats {% endblock title %}
 
 {% block content %}
-
-	{{rmt.user1.get_full_name}}
-	{{rmt.user2.get_full_name}}
-	{{rmt.chambre.name}} - {{rmt.chambre.get_cite_display}}
+	
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-11 col-md-8 col-lg-6">
+				<h5>Vous : {{user.get_full_name}}</h5>
+				<h5>Cochambre : {{coch.get_full_name}}</h5>
+				<h5>Genre : {{chambre.get_genre_display}}</h5>
+				<h5>Cité : {{chambre.get_cite_display}}</h5>
+				<h5>Chambre : {{chambre.name}}</h5>
+			</div>
+		</div>
+	</div>
 
 {% endblock content %}

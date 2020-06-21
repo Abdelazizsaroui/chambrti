@@ -30,5 +30,5 @@ urlpatterns = [
     path('roommate/', roommate, name='roommate'),
     path('add/<int:pk>/', add, name='add'),
     path('delete/', delete, name='delete'),
-    # path('done', done)
+    path('done', done)
 ]

@@ -134,8 +134,16 @@ def done(request):
 	if not request.user.is_superuser:
 		raise PermissionDenied
 	u = request.user
-	rmt = Roommates.objects.get(Q(user1=u)|Q(user2=u))
-	return render(request, 'done.html', {'rmt': rmt})
+	if u.roommate1.all().count() != 0 or u.roommate2.all().count() != 0:
+		if u.roommate1.all().count() != 0:
+			coch = u.roommate1.all().first().user2
+			chambre = u.roommate1.all().first().chambre
+			valid = u.roommate1.all().first().valid
+		else:
+			coch = u.roommate2.all().first().user1
+			chambre = u.roommate2.all().first().chambre
+			valid = u.roommate2.all().first().valid
+	return render(request, 'done.html', {'coch': coch, 'chambre': chambre, 'valid': valid})
 
 
 
