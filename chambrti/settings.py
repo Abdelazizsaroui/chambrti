@@ -26,7 +26,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 SECRET_KEY = '^w1nll)fqzk0+^&vqp*k2evre%h+6e4gull5)q0!uqfykh@3sx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
