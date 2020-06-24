@@ -9,6 +9,9 @@ class Chambre(models.Model):
 	genre = models.IntegerField(choices=GENRES, default=1)
 	is_taken = models.BooleanField(default=False)
 
+	class Meta:
+		ordering = ['name']
+
 	def __str__(self):
 		return self.num
 
