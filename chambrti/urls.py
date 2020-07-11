@@ -22,14 +22,14 @@ from users.views import register, roommate, add, delete, fuck
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('register/', register, name='register'),
-    path('results/', results, name='results'),
-    path('tirage/', tirage, name='tirage'),
-    path('roommate/', roommate, name='roommate'),
-    path('add/<int:pk>/', add, name='add'),
-    path('delete/', delete, name='delete'),
-    path('done/', done),
-    path('fuck/', fuck)
+    # path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # path('register/', register, name='register'),
+    # path('results/', results, name='results'),
+    # path('tirage/', tirage, name='tirage'),
+    # path('roommate/', roommate, name='roommate'),
+    # path('add/<int:pk>/', add, name='add'),
+    # path('delete/', delete, name='delete'),
+    # path('done/', done),
+    # path('fuck/', fuck)
 ]

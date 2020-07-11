@@ -8,35 +8,38 @@ from users.models import Roommates
 from django.contrib import messages
 from django.db.models import Q
 
-@login_required
-def home(request):
-	u = request.user
-	if u.roommate1.all().count() != 0 or u.roommate2.all().count() != 0:
-		if u.roommate1.all().count() != 0:
-			coch = u.roommate1.all().first().user2
-		else:
-			coch = u.roommate2.all().first().user1
-		if u.groups.all().first().name == "boy":
-			genre = 1
-		else:
-			genre = 2
-		lst1 = Chambre.objects.filter(cite=1, genre=genre)
-		lst2 = Chambre.objects.filter(cite=2, genre=genre)
-		lst3 = Chambre.objects.filter(cite=3, genre=genre)
+# @login_required
+# def home(request):
+# 	u = request.user
+# 	if u.roommate1.all().count() != 0 or u.roommate2.all().count() != 0:
+# 		if u.roommate1.all().count() != 0:
+# 			coch = u.roommate1.all().first().user2
+# 		else:
+# 			coch = u.roommate2.all().first().user1
+# 		if u.groups.all().first().name == "boy":
+# 			genre = 1
+# 		else:
+# 			genre = 2
+# 		lst1 = Chambre.objects.filter(cite=1, genre=genre)
+# 		lst2 = Chambre.objects.filter(cite=2, genre=genre)
+# 		lst3 = Chambre.objects.filter(cite=3, genre=genre)
 
-		rmt = Roommates.objects.get(Q(user1=u)|Q(user2=u))
-		if len(rmt.choices) > 3:
-			stored_choices = rmt.choices.split(",")
-			for i in range(len(stored_choices)):
-				num = stored_choices[i]
-				ch = Chambre.objects.get(num=num)
-				stored_choices[i] = ch.name + " " + ch.get_cite_display()
-			updated_at = rmt.updated_at
-			return render(request, 'home.html', {'lst1': lst1, 'lst2': lst2, 'lst3': lst3, 'coch': coch, 'stored_choices': stored_choices, 'updated_at': updated_at})
-		else:
-			return render(request, 'home.html', {'lst1': lst1, 'lst2': lst2, 'lst3': lst3, 'coch': coch})
-	else:
-		return redirect('roommate')
+# 		rmt = Roommates.objects.get(Q(user1=u)|Q(user2=u))
+# 		if len(rmt.choices) > 3:
+# 			stored_choices = rmt.choices.split(",")
+# 			for i in range(len(stored_choices)):
+# 				num = stored_choices[i]
+# 				ch = Chambre.objects.get(num=num)
+# 				stored_choices[i] = ch.name + " " + ch.get_cite_display()
+# 			updated_at = rmt.updated_at
+# 			return render(request, 'home.html', {'lst1': lst1, 'lst2': lst2, 'lst3': lst3, 'coch': coch, 'stored_choices': stored_choices, 'updated_at': updated_at})
+# 		else:
+# 			return render(request, 'home.html', {'lst1': lst1, 'lst2': lst2, 'lst3': lst3, 'coch': coch})
+# 	else:
+# 		return redirect('roommate')
+
+def home(request):
+	return render(request, "gif.html")
 
 @login_required
 def results(request):
